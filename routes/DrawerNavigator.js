@@ -11,16 +11,16 @@ const Drawer = createDrawerNavigator();
 
 const screenOptionStyle = {
   headerStyle: {
-    backgroundColor: '#f4a261',
+    backgroundColor: '#219ebc',
   },
   headerTintColor: '#fff',
   headerBackTitle: 'Back',
 };
 
-const DrawerNavigator = () => {
+const DrawerNavigator = ({products}) => {
   return (
     <Drawer.Navigator screenOptions={screenOptionStyle}>
-      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Home" component={Home} products={products}/>
       <Drawer.Screen name="About" component={About} />
       <Drawer.Screen name="Products" component={Products} />
       <Drawer.Screen name="Cart" component={Cart} />
