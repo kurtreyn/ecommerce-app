@@ -1,21 +1,35 @@
-import React from 'react';
-import { Text, View, Button } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, FlatList, Image } from 'react-native';
 import { Grid } from '@material-ui/core';
 
 import products from '../../lib/tempProducts';
 
 import styles from './stylesProducts';
 
-export default function Products({ navigation, products }) {
+export default function Products({ navigation }) {
+  const [productList, setProductList] = useState(products);
+
+  console.log(productList);
+
   return (
     <View style={styles.container}>
-      <Grid container justify="center" spacing={4}>
-        {products.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-            <Product product={product} onAddToCart={onAddToCart} />
-          </Grid>
-        ))}
-      </Grid>
+      <FlatList
+        keyExtractor={(item) => item.id}
+        data={productList}
+        renderItem={({ item }) => (
+          <View>
+            <Text>
+              {item.name} {item.price}
+            </Text>
+            <Image
+              source={{
+                uri: `${item.image}`,
+              }}
+              style={{ width: 200, height: 200 }}
+            />
+          </View>
+        )}
+      />
     </View>
   );
 }
